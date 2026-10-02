@@ -1,0 +1,13 @@
+﻿{
+  "mcpServers": {
+    "meta-ads": {
+      "type": "http",
+      "url": "https://meta-ads-mcp.leksinski.workers.dev/mcp",
+      "headers": {
+        "Authorization": "Bearer ${META_ACCESS_TOKEN}",
+        "X-Meta-App-Id": "${META_APP_ID}",
+        "X-Meta-App-Secret": "${META_APP_SECRET}"
+      }
+    }
+  }
+}

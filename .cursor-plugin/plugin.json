@@ -1,0 +1,57 @@
+﻿{
+  "name": "meta-ads",
+  "displayName": "Meta Ads",
+  "version": "1.0.0",
+  "description": "Manage Meta (Facebook/Instagram) ads with your own Marketing API credentials — campaigns, budgets, creatives, insights. Bring-your-own app for full control.",
+  "author": {
+    "name": "Technology 83",
+    "email": "Leksinski@gmail.com"
+  },
+  "homepage": "https://github.com/leksicon1/meta-ads-mcp",
+  "repository": "https://github.com/leksicon1/meta-ads-mcp",
+  "license": "MIT",
+  "logo": "assets/logo.svg",
+  "keywords": [
+    "meta ads",
+    "facebook ads",
+    "instagram ads",
+    "marketing api",
+    "campaigns",
+    "advertising",
+    "mcp",
+    "byo"
+  ],
+  "category": "integrations",
+  "tags": [
+    "meta",
+    "facebook",
+    "instagram",
+    "ads",
+    "marketing",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./mcp.json",
+  "gettingStarted": "getting-started",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "META_ACCESS_TOKEN": {
+        "type": "string",
+        "title": "Meta access token",
+        "description": "Business system-user token (preferred) or long-lived user token with ads_read, ads_management, and business_management."
+      },
+      "META_APP_ID": {
+        "type": "string",
+        "title": "Meta App ID",
+        "description": "App ID from developers.facebook.com → your app → Settings → Basic."
+      },
+      "META_APP_SECRET": {
+        "type": "string",
+        "title": "Meta App Secret",
+        "description": "App Secret from the same app (used only to sign appsecret_proof). Paste into setup fields only — never into chat."
+      }
+    },
+    "required": ["META_ACCESS_TOKEN", "META_APP_ID", "META_APP_SECRET"]
+  }
+}
