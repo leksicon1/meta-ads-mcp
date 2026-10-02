@@ -7,16 +7,25 @@ description: First-run onboarding for the BYO Meta Ads MCP. Use when the user in
 
 Walk any installer from zero to a working connector. Stay warm and clear. Use short paragraphs and numbered steps. Never ask them to paste App Secret or access tokens into chat. Secrets go only into Grok Bot setup fields, AddMcpServer env, or a secret-request UI.
 
-## Why bring-your-own Meta app
+## How to talk about it
 
-This connector is **shared code**, not a shared Meta app you OAuth into.
+Say **connect your ad account**. Do not lead with "create your own Meta app." The developer app is a setup detail inside this skill, not the product.
 
-- **You own the tokens.** App ID, App Secret, and access token live in *your* Meta developer account and *your* Grok Bot config.
-- **More control.** You choose which ad accounts the token can touch, which permissions it has, and when to revoke it.
-- **No third-party middleman.** You are not depending on someone else's App Review, rate limits, or outage.
-- **Self-serve BYO works today.** Run this MCP yourself at no charge from us. A hosted tier for heavier media pipelines may arrive later; BYO setup is complete and ready now.
+## Pricing
 
-Private use on ad accounts you admin usually does **not** need Meta App Review. App Review matters when one Meta app serves many strangers.
+Say this if they ask what it costs. Billing is not enforced yet. Do not invent other prices.
+
+Checked on calendar-month ad spend. Flat fee, not a percent of spend.
+
+| Monthly ad spend | Price |
+| --- | --- |
+| Under $500 | Free |
+| $500 to $5,000 | $49 / month |
+| Over $5,000 | $199 / month |
+
+Drop back under a line and the next month follows the lower price.
+
+Private use on ad accounts they admin usually does **not** need Meta App Review. App Review matters when one Meta app serves many strangers.
 
 ## When to use
 
@@ -60,7 +69,7 @@ Do **not** call write tools (`set_status`, `update_budget`, `create_*`, `run_gra
 
 Tell the user, in your own words:
 
-> You will create **your own** Meta developer app, add Marketing API, mint a token (preferably a Business system-user token), then paste App ID, App Secret, and token into Grok Bot setup fields. After that, this bot can list accounts and manage ads you assigned. Secrets never go in chat. v1 is self-serve BYO; any paid threshold for heavy use comes later.
+> You'll connect your ad account. I'll walk the Meta setup one screen at a time, then you paste the credentials into setup fields, not this chat. After that we can list accounts and manage the ads you assigned. Free under $500 a month in ad spend, $49 up to $5,000, $199 above that.
 
 Then ask them to open two tabs and keep this chat open:
 
@@ -273,17 +282,59 @@ From here they can pause/activate, adjust budgets, upload images, and create **P
 
 ---
 
-## Soft note on pricing
 
-v1 is **self-serve BYO**: their Meta app, their token, this open connector code.
+## Real first-install traps
 
-A polished hosted tier for heavier media may be defined later. Do not invent prices. If they ask, say heavier media hosting is on the roadmap and point them back to finishing connect — BYO already gives full campaign control.
+These showed up on a real Business app install. Use them when the installer gets stuck. Do not ask for screenshots that contain tokens.
+
+### Graph Explorer is not the permanent token
+
+A user token from Graph API Explorer expires in about an hour (`expires_at` is a timestamp). It is only a smoke test. Say that out loud before they rely on it.
+
+Both of these permissions are required on that test token, or listing accounts fails:
+
+- `ads_management`
+- `business_management`
+
+Missing `business_management` returns `(#100) Requires business_management permission` even when the token is valid and `ads_management` is present.
+
+### "No permissions available" on Generate token
+
+The system user can already have the ad account assigned and still see **No permissions available** / "Assign an app role to the system user".
+
+The fix is not **Add people** on developers.facebook.com → App roles. That picker is Facebook accounts only. The system user will not be in it.
+
+Do this instead:
+
+1. Business settings → **Apps** → select the ads app.
+2. **Assign people**.
+3. Add the system user (for example MetaAds) with full access.
+4. Go back to **System users** → that user → **Generate token**.
+5. Select that same app, expiration **Never**, and at least `ads_management` and `business_management`.
+
+**Installed apps** stays empty until a token is actually generated. That empty state is normal. It is not the place to assign the app.
+
+### Wrong app
+
+An older Instagram or messaging app cannot grow `ads_management`. If **Add use cases** says every use case is already added, stop and create a new **Business** app. The token's app must be the same app as the App ID and App Secret.
+
+### What a good system-user token looks like
+
+After they paste it into a secure field (never chat), `doctor` should show:
+
+- `type`: `SYSTEM_USER`
+- `expires_at`: `0` (does not expire)
+- scopes include `ads_management` and `business_management`
+- `me.name` is the system user, not the person's Facebook name
+
+`list_ad_accounts` then returns only ad accounts assigned to that system user. A personal ad account that was visible on the short user token will disappear. That is correct. Assign the business ad account under **Assigned assets** if the business account is missing.
+
 
 ---
 
 ## Agent checklist (copy for your turn)
 
-1. Explain why BYO (control, no middleman, ready today).
+1. Say connect your ad account, and the price if they ask (free under $500/mo, $49 to $5,000, $199 above).
 2. Prerequisites.
 3. Create app → Marketing API.
 4. System user (preferred) or Graph Explorer fallback.

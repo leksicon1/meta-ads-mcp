@@ -1,32 +1,36 @@
-# Meta Ads (marketplace plugin)
+# Meta Ads
 
-**Your Meta app. Your tokens. Full control in chat.**
+Connect your Meta ad account and run it from chat.
 
-This plugin connects Grok Bot / Cursor to the Meta Marketing API using **bring-your-own** credentials. You keep ownership of the developer app, system user, and ad-account assignments — the connector is shared engineering, not a shared Meta app.
+Campaigns, budgets, creatives, and insights in Grok Bot or Cursor. New ads start off until you turn spend on.
 
-## Why BYO
+## Pricing
 
-- **Control** — you decide which accounts the token can touch and when to revoke it.
-- **Clarity** — no third-party Ads middleman sitting between you and Graph.
-- **Ready today** — install, complete setup fields, run `doctor` → `list_ad_accounts`.
+Checked on calendar-month ad spend. Flat fee, not a cut of the budget.
 
-A hosted usage tier for heavier media pipelines may arrive later; self-serve BYO works now.
+| Monthly ad spend | Price |
+| --- | --- |
+| Under $500 | Free |
+| $500 to $5,000 | $49 / month |
+| Over $5,000 | $199 / month |
+
+Drop back under a line and the next month follows the lower price. Billing is not enforced yet. The prices are the offer.
 
 ## Setup
 
 1. Install the plugin from the marketplace.
-2. Open the **getting-started** skill and follow the hand-held Meta app + system-user walkthrough.
-3. Paste **App ID**, **App Secret**, and **access token** into plugin setup fields only (never into chat).
-4. Call `doctor`, then `list_ad_accounts`.
+2. Open the **getting-started** skill and connect your ad account.
+3. Put credentials in plugin setup fields only, never in chat.
+4. Run a health check, then list your ad accounts.
 
-`mcp.json` points at `https://YOUR_HOST/mcp` until the production Worker URL is substituted at publish time.
+The hosted endpoint is `https://mcp.meta-ads.technology83.com/mcp`.
 
 ## Creative media
 
 - Compact stills: `upload_image_from_url` → `image_hash`.
-- Production images / all video: upload in Ads Manager, Graph, or `scripts/resumable-video-upload.mjs`, then pass **image_hash** / **video_id** into `create_creative`.
+- Production images and all video: upload in Ads Manager or Graph, then pass **image_hash** / **video_id** into `create_creative`.
 - Ask the agent for `get_media_upload_guide` anytime.
 
 ## License
 
-MIT — see LICENSE. You remain responsible for Marketing API compliance on your Meta app and ad accounts.
+MIT — see LICENSE. You remain responsible for Marketing API compliance on your ad accounts.

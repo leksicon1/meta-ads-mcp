@@ -2,7 +2,7 @@
     "name":  "meta-ads",
     "displayName":  "Meta Ads",
     "version":  "1.0.0",
-    "description":  "Manage Meta (Facebook/Instagram) ads with your own Marketing API credentials — campaigns, budgets, creatives, insights. Bring-your-own app for full control.",
+    "description":  "Connect your Meta ad account and run campaigns, budgets, creatives, and insights from chat. Free under $500 a month in ad spend.",
     "author":  {
                    "name":  "Technology 83",
                    "email":  "Leksinski@gmail.com"
@@ -19,7 +19,7 @@
                      "campaigns",
                      "advertising",
                      "mcp",
-                     "byo"
+                     "pricing"
                  ],
     "category":  "integrations",
     "tags":  [
