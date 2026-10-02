@@ -28,6 +28,8 @@ The hosted endpoint is `https://mcp.meta-ads.technology83.com/mcp`.
 ## Also in the connector
 
 - Find ads that spent money with no purchase or lead. Nothing is paused unless you ask.
+- Draft three headline and text options. Images stay yours.
+- Recommend which ads to pause. Nothing changes unless you ask.
 - Search the public ad library by country: copy, page, and how long the ad has been up.
 
 ## Creative media
