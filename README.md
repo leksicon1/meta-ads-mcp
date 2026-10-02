@@ -25,6 +25,11 @@ Drop back under a line and the next month follows the lower price. Billing is no
 
 The hosted endpoint is `https://mcp.meta-ads.technology83.com/mcp`.
 
+## Also in the connector
+
+- Find ads that spent money with no purchase or lead. Nothing is paused unless you ask.
+- Search the public ad library by country: copy, page, and how long the ad has been up.
+
 ## Creative media
 
 - Compact stills: `upload_image_from_url` → `image_hash`.
